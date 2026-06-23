@@ -1,2 +1,4 @@
 node_modules/
 midscene_run/
+.midscene_cache/
+report-output/
