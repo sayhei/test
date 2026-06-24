@@ -22,6 +22,7 @@ async function runFromYaml() {
   const yamlContent = readFileSync(yamlPath, 'utf-8');
   
   console.log(`📋 加载 YAML 文件: ${yamlPath}`);
+  console.log(`\n🔧 缓存模式: ${process.env.MIDSCENE_CACHE_MODE || '默认（使用环境变量）'}`);
   
   const agent = await agentForComputer();
   

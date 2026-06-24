@@ -7,17 +7,21 @@
     "verify": "npx tsx src/scripts/verify-setup.ts",
     "test:wind": "npx tsx src/tests/wind/stock-browser.ts",
     "test:wind:yaml": "npx tsx src/tests/wind/stock-browser-yaml.ts",
+    "test:wind:yaml:write": "cross-env MIDSCENE_CACHE_MODE=write npx tsx src/tests/wind/stock-browser-yaml.ts",
+    "test:wind:yaml:read": "cross-env MIDSCENE_CACHE_MODE=read npx tsx src/tests/wind/stock-browser-yaml.ts",
+    "test:wind:yaml:off": "cross-env MIDSCENE_CACHE_MODE=off npx tsx src/tests/wind/stock-browser-yaml.ts",
     "test:ebay": "npx tsx src/tests/web/ebay.ts",
     "test:ebay:dev": "npx tsx src/tests/web/ebay-dev.ts",
-    "test:ebay:prod": "MIDSCENE_CACHE_MODE=read npx tsx src/tests/web/ebay-prod.ts",
+    "test:ebay:prod": "cross-env MIDSCENE_CACHE_MODE=read npx tsx src/tests/web/ebay-prod.ts",
     "test:report": "npx tsx src/tests/web/report-analyzer.ts",
     "demo": "npx tsx src/tests/wind/stock-browser.ts"
   },
   "devDependencies": {
     "@midscene/web": "^1.10.0",
+    "@types/node": "^20.0.0",
+    "cross-env": "^10.1.0",
     "playwright": "^1.61.0",
-    "tsx": "^4.22.4",
-    "@types/node": "^20.0.0"
+    "tsx": "^4.22.4"
   },
   "dependencies": {
     "@midscene/computer": "^1.10.0",
@@ -26,7 +30,9 @@
   },
   "tsx": {
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": [
+        "./src/*"
+      ]
     }
   }
 }
