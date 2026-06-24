@@ -1,339 +1,259 @@
-# Wind金融终端自动化测试指南
+# Midscene 使用指南
+
+Midscene 是 AI 驱动的自动化测试工具，支持 YAML 配置和 TypeScript 脚本。
+
+---
 
 ## 📋 目录
 
-- [快速开始](#快速开始)
-- [环境配置](#环境配置)
-- [测试脚本说明](#测试脚本说明)
-- [运行脚本](#运行脚本)
-- [故障排除](#故障排除)
-- [高级配置](#高级配置)
+- [YAML 配置方式](#yaml-配置方式)
+- [TypeScript 脚本方式](#typescript-脚本方式)
+- [缓存模式](#缓存模式)
+- [YAML 指令说明](#yaml-指令说明)
+- [常见问题](#常见问题)
 
 ---
 
-## 🚀 快速开始
+## 📝 YAML 配置方式
 
-### 1. 安装依赖
+### YAML 文件结构
 
-```bash
-npm install @midscene/computer
+`stock-browser.yaml` 定义测试流程：
+
+```yaml
+computer:
+  displayId: '0'
+
+tasks:
+  - name: 点击右下角搜索框
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口右下角的搜索输入框
+      - sleep: 500
+
+  - name: 输入"股票数据浏览器"
+    flow:
+      - aiInput: ''
+        value: 股票数据浏览器
+        locate: Wind金融终端窗口右下角的搜索输入框
+      - sleep: 1500
 ```
 
-### 2. 配置模型
-
-在 `.env` 文件中添加：
-
-```env
-# 模型配置（本地 Ollama）
-MIDSCENE_MODEL_BASE_URL="http://localhost:14471/v1"
-MIDSCENE_MODEL_API_KEY="ollama"
-MIDSCENE_MODEL_NAME="huihui_ai/qwen3-vl-abliterated:4b-instruct"
-MIDSCENE_MODEL_FAMILY="qwen3-vl"
-MIDSCENE_USE_QWEN3_VL=1
-
-# 缓存配置（可选，加速后续运行）
-MIDSCENE_CACHE=true
-MIDSCENE_CACHE_MODE=read-write
-```
-
-### 3. 启动 Wind金融终端
-
-确保 Wind金融终端已启动并处于可操作状态。
-
-### 4. 运行测试
+### 运行 YAML 测试
 
 ```bash
-# 标准版本
-npx tsx demo-wind.ts
-
-# 健壮版本（带重试机制）
-npx tsx demo-wind-robust.ts
+npm run test:wind:yaml
 ```
 
 ---
 
-## 🔧 环境配置
+## 💻 TypeScript 脚本方式
 
-### 系统要求
+### 脚本文件
 
-- **操作系统**: Windows 10/11
-- **Node.js**: 18.19.0 或更高版本
-- **模型服务**: Ollama（本地）或云端 API
+`stock-browser.ts` 使用 Midscene API：
 
-### Windows 权限说明
+```typescript
+import { agentForComputer } from '@midscene/computer';
 
-⚠️ **重要**：Windows 隔离了不同权限级别的输入（UIPI）：
-- 非管理员进程 **无法** 向管理员窗口发送鼠标或键盘输入
-- 如果目标应用程序以管理员权限运行，请也以管理员权限启动终端
+const agent = await agentForComputer();
 
-**解决方案**：
-1. 首选：目标应用程序和 Midscene 都以普通权限运行
-2. 备选：都以管理员权限运行
+await agent.aiAct('点击右下角搜索框');
+await agent.aiInput('股票数据浏览器');
+```
 
-### Ollama 配置
+### 运行 TypeScript 测试
 
 ```bash
-# 启动 Ollama
+npm run test:wind
+```
+
+---
+
+## 🚀 缓存模式
+
+缓存模式可以大幅提高稳定性。
+
+### 缓存模式说明
+
+| 模式 | 说明 | 使用场景 |
+|------|------|---------|
+| `write` | 写入缓存 | 首次运行 |
+| `read` | 只读缓存 | 后续运行（最快） |
+| `off` | 关闭缓存 | 页面变化后 |
+
+### 运行命令
+
+```bash
+# 首次运行：写入缓存
+npm run test:wind:yaml:write
+
+# 后续运行：使用缓存
+npm run test:wind:yaml:read
+
+# 关闭缓存
+npm run test:wind:yaml:off
+```
+
+---
+
+## 📋 YAML 指令说明
+
+### 基础指令
+
+| 指令 | 说明 | 示例 |
+|------|------|------|
+| `aiTap` | 左键单击 | `aiTap: ''` + `locate` |
+| `aiInput` | 输入文本 | `aiInput: ''` + `value` |
+| `aiAct` | 自由描述操作 | `aiAct: 右击元素` |
+| `aiWaitFor` | 等待条件 | `aiWaitFor: 元素出现` |
+| `sleep` | 固定等待 | `sleep: 2000` |
+
+### locate 描述规范
+
+```yaml
+# ✅ 正确：精确描述
+locate: Wind金融终端窗口内左侧面板，带有"按拼音查找指标"提示的输入框
+
+# ❌ 错误：模糊描述
+locate: 找到输入框
+```
+
+**关键特征**：
+- 窗口范围：`Wind金融终端窗口内`
+- 位置：`左侧面板`、`右下角`
+- 提示文字：`带有"xxx"提示`
+- 排除项：`（不是"xxx"）`
+
+### 复杂操作
+
+```yaml
+# 右键点击
+- aiAct: 在Wind金融终端窗口内，找到元素并执行鼠标右键点击
+
+# 双击
+- aiAct: 在Wind金融终端窗口内，找到元素并执行鼠标左键双击
+
+# 等待元素
+- aiWaitFor: Wind金融终端窗口内弹出对话框
+  timeout: 10000
+```
+
+---
+
+## ⚠️ 常见问题
+
+### Q1: 操作不稳定？
+
+**解决方案**：使用缓存模式
+
+```bash
+npm run test:wind:yaml:write  # 首次写入
+npm run test:wind:yaml:read   # 后续使用
+```
+
+### Q2: 选错元素？
+
+**解决方案**：精确 `locate` 描述
+
+```yaml
+# 添加排除项
+locate: Wind金融终端窗口内第二行选项（不是第一行"全球股票指标"）
+
+# 添加完整路径
+locate: Wind金融终端窗口内"区间日均总市值 - 内地股票指标 - 行情指标"选项
+```
+
+### Q3: 右键/双击无效？
+
+**解决方案**：使用 `aiAct` 而不是 `aiTap`
+
+```yaml
+# ❌ aiTap 只支持左键单击
+- aiTap: ''
+  locate: ...右键点击  # 无效
+
+# ✅ aiAct 支持复杂操作
+- aiAct: 执行鼠标右键点击
+```
+
+### Q4: 弹窗消失太快？
+
+**解决方案**：增加等待时间
+
+```yaml
+- aiInput: ''
+  value: 股票数据浏览器
+- sleep: 2000  # 增加等待
+- aiWaitFor: 弹出下拉列表  # 验证弹窗
+```
+
+### Q5: Ollama 连接失败？
+
+**解决方案**：检查 Ollama 服务
+
+```bash
 ollama serve
-
-# 确认模型列表
 curl http://localhost:14471/api/tags
 ```
 
 ---
 
-## 📝 测试脚本说明
+## 🛠️ 高级配置
 
-### demo-wind.ts - 标准版本
+### 自定义 YAML 流程
 
-**特点**：
-- 代码简洁，易于理解
-- 16 个步骤完整覆盖用户需求
-- 无额外错误处理
+编辑 `stock-browser.yaml`：
 
-**适用场景**：
-- 初步测试
-- 调试简单问题
+```yaml
+# 修改等待时间
+- sleep: 3000  # 增加到 3 秒
 
-### demo-wind-robust.ts - 健壮版本
-
-**特点**：
-- 自动重试机制（最多 3 次）
-- 详细的步骤日志
-- 更好的错误处理和恢复
-- 集中配置管理
-
-**适用场景**：
-- 生产环境
-- 复杂自动化流程
-- 长时间运行的测试
-
----
-
-## ▶️ 运行脚本
-
-### 方式 1：直接运行
-
-```bash
-npx tsx demo-wind.ts
+# 添加新步骤
+- name: 新步骤
+  flow:
+    - aiTap: ''
+      locate: Wind金融终端窗口内新元素
+    - sleep: 1000
 ```
 
-### 方式 2：使用健壮版本
+### 自定义 TypeScript 脚本
 
-```bash
-npx tsx demo-wind-robust.ts
-```
-
-### 方式 3：使用缓存加速
-
-```bash
-# 首次运行（生成缓存）
-npx tsx demo-wind-robust.ts
-
-# 后续运行（使用缓存）
-npx tsx demo-wind-robust.ts
-```
-
-### 方式 4：只读缓存模式（生产环境）
-
-```bash
-MIDSCENE_CACHE_MODE=read-only npx tsx demo-wind-robust.ts
-```
-
----
-
-## 🐛 故障排除
-
-### 问题 1：无法连接到模型服务
-
-**症状**：
-```
-Error: Connection error
-```
-
-**解决方案**：
-1. 检查 Ollama 是否运行：`curl http://localhost:14471/api/tags`
-2. 确认端口配置正确（默认是 14471）
-3. 检查防火墙设置
-
-### 问题 2：操作无法执行
-
-**症状**：
-```
-TaskExecutionError: AI model request failed
-```
-
-**解决方案**：
-1. 确保 Wind金融终端已启动
-2. 检查屏幕分辨率是否正常
-3. 尝试以管理员权限运行
-
-### 问题 3：权限被拒绝
-
-**症状**：
-```
-Error: Access denied
-```
-
-**解决方案**：
-1. 右键点击终端 → "以管理员身份运行"
-2. 或者关闭 Wind 终端的管理员权限模式
-
-### 问题 4：找不到元素
-
-**症状**：
-```
-Error: Cannot locate element
-```
-
-**解决方案**：
-1. 检查屏幕是否可见
-2. 确认应用程序窗口未被最小化
-3. 尝试调整 `CONFIG.wait` 中的等待时间
-
----
-
-## ⚙️ 高级配置
-
-### 自定义测试参数
-
-编辑 `demo-wind-robust.ts` 中的 `CONFIG` 对象：
+编辑 `stock-browser.ts`：
 
 ```typescript
-const CONFIG = {
-  wind: {
-    stockCode: '600006',           // 股票代码
-    stockName: '东风股份',         // 股票名称
-    indicators: ['市值', 'PE'],    // 要添加的指标
-    exportPath: 'C:\\Users\\gyy\\Desktop\\新建文件夹',  // 导出路径
-  },
-  retry: {
-    maxAttempts: 3,              // 最大重试次数
-    delay: 2000,                 // 重试延迟（毫秒）
-  },
-  wait: {
-    short: 1000,                 // 短等待（毫秒）
-    medium: 2000,                // 中等等待
-    long: 3000,                  // 长等待
-  },
-};
-```
+// 修改股票代码
+const stockCode = '600006';
 
-### 使用其他模型服务
+// 修改指标
+const indicators = ['市值', 'PE'];
 
-#### OpenAI API
-
-```env
-MIDSCENE_MODEL_BASE_URL="https://api.openai.com/v1"
-MIDSCENE_MODEL_API_KEY="sk-xxxx"
-MIDSCENE_MODEL_NAME="gpt-4o"
-MIDSCENE_MODEL_FAMILY="gpt-4o"
-```
-
-#### Azure OpenAI
-
-```env
-MIDSCENE_MODEL_BASE_URL="https://xxx.openai.azure.com/v1"
-MIDSCENE_MODEL_API_KEY="your-api-key"
-MIDSCENE_MODEL_NAME="gpt-4o"
-MIDSCENE_MODEL_FAMILY="azure-openai"
-```
-
-#### 阿里云 DashScope
-
-```env
-MIDSCENE_MODEL_BASE_URL="https://dashscope.aliyuncs.com/v1"
-MIDSCENE_MODEL_API_KEY="sk-xxxx"
-MIDSCENE_MODEL_NAME="qwen-vl-plus"
-MIDSCENE_MODEL_FAMILY="qwen-vl"
-```
-
-### 启用调试日志
-
-```bash
-# 启用详细日志
-MIDSCENE_LOG_LEVEL=debug npx tsx demo-wind-robust.ts
-```
-
-### 截取屏幕快照
-
-Midscene 会自动生成报告文件，包含每一步的屏幕快照：
-
-```
-midscene_run/
-├── report/
-│   └── computer-2026-06-23_22-xx-xx-xxxx.html
-└── screenshots/
-    └── ...
+// 修改导出路径
+const exportPath = 'C:\\Users\\gyy\\Desktop\\新建文件夹';
 ```
 
 ---
 
-## 📊 测试流程详解
+## 📊 与 Ui.Vision 对比
 
-### 完整流程（16 步）
-
-1. **输入"股票数据浏览器"** → 在左下角搜索框输入
-2. **点击选项** → 打开股票数据浏览器
-3. **输入股票代码** → 输入"600006"
-4. **选择股票** → 选择"东风股份"
-5. **输入指标** → 输入"市值"
-6. **选择 PE** → 从列表中选择
-7. **选择分类** → 选择"内地股票指标"
-8. **确认输入** → 按回车键
-9. **右键点击** → 右键点击指标
-10. **添加指标** → 在菜单中选择
-11. **确认参数** → 使用默认值
-12. **确认添加** → 点击确定
-13. **提取数据** → 点击提取数据按钮
-14. **等待加载** → 等待表格数据加载
-15. **导出数据** → 点击导出数据按钮
-16. **保存文件** → 修改路径并确认
+| 特性 | Midscene | Ui.Vision RPA |
+|------|----------|---------------|
+| **稳定性** | ⭐⭐⭐ 中 | ⭐⭐⭐⭐⭐ 高 |
+| **学习成本** | ⭐⭐⭐⭐⭐ 低 | ⭐⭐⭐ 中 |
+| **调试难度** | ⭐⭐⭐ 中 | ⭐⭐⭐⭐⭐ 低 |
+| **API Key** | ✅ 需要 | ❌ 不需要 |
+| **桌面支持** | 原生支持 | 需要 XModules |
+| **页面变化** | ✅ AI 自适应 | ❌ 需重新截图 |
 
 ---
 
-## 💡 最佳实践
+## 📚 相关文档
 
-### 1. 开发阶段
-
-- 使用健壮版本（`demo-wind-robust.ts`）
-- 启用缓存加速调试
-- 保持应用程序状态一致
-
-### 2. 生产环境
-
-- 使用只读缓存模式
-- 增加重试次数
-- 添加超时保护
-- 定期清理缓存文件
-
-### 3. CI/CD 集成
-
-```bash
-# 在 CI 环境中运行
-MIDSCENE_CACHE_MODE=read-only npx tsx demo-wind-robust.ts
-```
+- [README.md](README.md) - 项目主文档
+- [UIVISION_GUIDE.md](UIVISION_GUIDE.md) - Ui.Vision 使用指南
+- [PERFORMANCE_OPTIMIZATION.md](PERFORMANCE_OPTIMIZATION.md) - 性能优化
+- [CHECKLIST.md](CHECKLIST.md) - 测试前检查清单
 
 ---
 
-## 📚 相关资源
-
-- [Midscene 官方文档](https://v1.midscenejs.com/)
-- [PC Desktop 入门](https://v1.midscenejs.com/computer-getting-started)
-- [API 参考](https://v1.midscenejs.com/computer-api-reference)
-- [缓存机制](https://v1.midscenejs.com/caching.html)
-
----
-
-## 🤝 支持
-
-如遇问题，请：
-1. 查看[故障排除](#故障排除)章节
-2. 检查[官方文档](https://v1.midscenejs.com/)
-3. 提交 Issue 到 [GitHub](https://github.com/web-infra-dev/midscene)
-
----
-
-**版本**: 1.0.0  
-**更新日期**: 2026-06-23  
-**作者**: Midscene Windows Automation Team
+**版本**: 2.0.0 | **更新**: 2026-06-24
