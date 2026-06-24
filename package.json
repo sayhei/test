@@ -1,12 +1,31 @@
 {
+  "name": "midscene-wind-automation",
+  "version": "1.0.0",
+  "description": "Midscene.js 自动化测试项目 - Wind 金融终端",
+  "type": "module",
+  "scripts": {
+    "verify": "npx tsx src/scripts/verify-setup.ts",
+    "test:wind": "npx tsx src/tests/wind/stock-browser.ts",
+    "test:ebay": "npx tsx src/tests/web/ebay.ts",
+    "test:ebay:dev": "npx tsx src/tests/web/ebay-dev.ts",
+    "test:ebay:prod": "MIDSCENE_CACHE_MODE=read npx tsx src/tests/web/ebay-prod.ts",
+    "test:report": "npx tsx src/tests/web/report-analyzer.ts",
+    "demo": "npx tsx src/tests/wind/stock-browser.ts"
+  },
   "devDependencies": {
     "@midscene/web": "^1.10.0",
     "playwright": "^1.61.0",
-    "tsx": "^4.22.4"
+    "tsx": "^4.22.4",
+    "@types/node": "^20.0.0"
   },
   "dependencies": {
     "@midscene/computer": "^1.10.0",
     "@playwright/test": "^1.61.0",
     "dotenv": "^17.4.2"
+  },
+  "tsx": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   }
 }
