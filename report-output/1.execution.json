@@ -1,0 +1,80 @@
+{
+  "sdkVersion": "1.10.0",
+  "groupName": "Midscene Report",
+  "groupDescription": "",
+  "modelBriefs": [],
+  "executions": [
+    {
+      "id": "ed151c71-9a9a-4ddb-bcbd-0ffcc5bb5316",
+      "logTime": 1782223784550,
+      "name": "Act - 在搜索框输入 \"Headphones\"，然后回车",
+      "tasks": [
+        {
+          "taskId": "e4a3aada-a95f-4cbc-bf16-c0befcfe3b3d",
+          "status": "finished",
+          "type": "Planning",
+          "subType": "LoadYaml",
+          "param": {
+            "userInstruction": "在搜索框输入 \"Headphones\"，然后回车"
+          },
+          "timing": {
+            "start": 1782223784566,
+            "getUiContextStart": 1782223784567,
+            "getUiContextEnd": 1782223784708,
+            "captureAfterCallingSnapshotStart": 1782223784708,
+            "captureAfterCallingSnapshotEnd": 1782223784762,
+            "end": 1782223784762,
+            "cost": 196
+          },
+          "uiContext": {
+            "shotSize": {
+              "width": 1280,
+              "height": 720
+            },
+            "deprecatedDpr": 1,
+            "screenshot": {
+              "type": "midscene_screenshot_ref",
+              "id": "f56b5ea9-b200-4b6c-af4e-faec4d0967e0",
+              "capturedAt": 1782223784657,
+              "mimeType": "image/jpeg",
+              "storage": "file",
+              "path": "./screenshots/f56b5ea9-b200-4b6c-af4e-faec4d0967e0.jpeg"
+            },
+            "shrunkShotToLogicalRatio": 1
+          },
+          "recorder": [
+            {
+              "type": "screenshot",
+              "ts": 1782223784762,
+              "screenshot": {
+                "type": "midscene_screenshot_ref",
+                "id": "94dbb707-f2dd-454c-aa34-a30cdb5cadf8",
+                "capturedAt": 1782223784736,
+                "mimeType": "image/jpeg",
+                "storage": "file",
+                "path": "./screenshots/94dbb707-f2dd-454c-aa34-a30cdb5cadf8.jpeg"
+              },
+              "timing": "after-calling"
+            }
+          ],
+          "output": {
+            "actions": [],
+            "shouldContinuePlanning": false,
+            "log": "",
+            "yamlString": "tasks:\n  - name: 在搜索框输入 \"Headphones\"，然后回车\n    flow:\n      - aiTap: ''\n        locate: the search bar labeled 'Search for anything'\n      - aiInput: ''\n        value: Headphones\n      - aiTap: ''\n        locate: the blue 'Search' button\n"
+          },
+          "cache": {
+            "hit": true
+          },
+          "hitBy": {
+            "from": "Cache",
+            "context": {
+              "yamlString": "tasks:\n  - name: 在搜索框输入 \"Headphones\"，然后回车\n    flow:\n      - aiTap: ''\n        locate: the search bar labeled 'Search for anything'\n      - aiInput: ''\n        value: Headphones\n      - aiTap: ''\n        locate: the blue 'Search' button\n"
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "deviceType": "playwright"
+}

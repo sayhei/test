@@ -1,0 +1,146 @@
+{
+  "sdkVersion": "1.10.0",
+  "groupName": "Midscene Report",
+  "groupDescription": "",
+  "modelBriefs": [],
+  "executions": [
+    {
+      "id": "bef03164-77bb-4497-bd09-6988a195a6a6",
+      "logTime": 1782223784766,
+      "name": "Tap - the search bar labeled 'Search for anything'",
+      "tasks": [
+        {
+          "taskId": "6afeb7f0-2386-4850-b16e-8f9c9e8c35cc",
+          "status": "finished",
+          "type": "Planning",
+          "subType": "Locate",
+          "param": {
+            "prompt": "the search bar labeled 'Search for anything'",
+            "deepLocate": false,
+            "cacheable": true
+          },
+          "thought": "",
+          "timing": {
+            "start": 1782223784768,
+            "getUiContextStart": 1782223784768,
+            "getUiContextEnd": 1782223784822,
+            "end": 1782223784831,
+            "cost": 63
+          },
+          "uiContext": {
+            "shotSize": {
+              "width": 1280,
+              "height": 720
+            },
+            "deprecatedDpr": 1,
+            "screenshot": {
+              "type": "midscene_screenshot_ref",
+              "id": "030106ba-b529-471d-b029-8da3c98a95c6",
+              "capturedAt": 1782223784793,
+              "mimeType": "image/jpeg",
+              "storage": "file",
+              "path": "./screenshots/030106ba-b529-471d-b029-8da3c98a95c6.jpeg"
+            },
+            "shrunkShotToLogicalRatio": 1
+          },
+          "output": {
+            "element": {
+              "center": [
+                557,
+                71
+              ],
+              "rect": {
+                "left": 271,
+                "top": 51,
+                "width": 572,
+                "height": 40
+              },
+              "description": "the search bar labeled 'Search for anything'",
+              "dpr": 1
+            }
+          },
+          "hitBy": {
+            "from": "Cache",
+            "context": {
+              "cacheEntry": {
+                "xpaths": [
+                  "/html/body/div[2]/div[1]/header[1]/section[1]/form[1]/div[1]/div[1]/div[1]/input[1]"
+                ]
+              }
+            }
+          },
+          "recorder": []
+        },
+        {
+          "taskId": "f7ef55f8-1b08-4491-a0c0-eda7cdbaf7ba",
+          "status": "finished",
+          "type": "Action Space",
+          "subType": "Tap",
+          "thought": "",
+          "param": {
+            "locate": {
+              "center": [
+                557,
+                71
+              ],
+              "rect": {
+                "left": 271,
+                "top": 51,
+                "width": 572,
+                "height": 40
+              },
+              "description": "the search bar labeled 'Search for anything'"
+            }
+          },
+          "timing": {
+            "start": 1782223784832,
+            "getUiContextStart": 1782223784833,
+            "getUiContextEnd": 1782223784833,
+            "beforeInvokeActionHookStart": 1782223784834,
+            "beforeInvokeActionHookEnd": 1782223785034,
+            "callActionStart": 1782223785035,
+            "callActionEnd": 1782223785045,
+            "afterInvokeActionHookStart": 1782223785045,
+            "afterInvokeActionHookEnd": 1782223785378,
+            "captureAfterCallingSnapshotStart": 1782223785378,
+            "captureAfterCallingSnapshotEnd": 1782223785447,
+            "end": 1782223785447,
+            "cost": 615
+          },
+          "uiContext": {
+            "shotSize": {
+              "width": 1280,
+              "height": 720
+            },
+            "deprecatedDpr": 1,
+            "screenshot": {
+              "type": "midscene_screenshot_ref",
+              "id": "030106ba-b529-471d-b029-8da3c98a95c6",
+              "capturedAt": 1782223784793,
+              "mimeType": "image/jpeg",
+              "storage": "file",
+              "path": "./screenshots/030106ba-b529-471d-b029-8da3c98a95c6.jpeg"
+            },
+            "shrunkShotToLogicalRatio": 1
+          },
+          "recorder": [
+            {
+              "type": "screenshot",
+              "ts": 1782223785447,
+              "screenshot": {
+                "type": "midscene_screenshot_ref",
+                "id": "2953659a-f65c-484f-ae62-0d5fc1d9add7",
+                "capturedAt": 1782223785426,
+                "mimeType": "image/jpeg",
+                "storage": "file",
+                "path": "./screenshots/2953659a-f65c-484f-ae62-0d5fc1d9add7.jpeg"
+              },
+              "timing": "after-calling"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "deviceType": "playwright"
+}

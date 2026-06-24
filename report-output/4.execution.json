@@ -1,0 +1,146 @@
+{
+  "sdkVersion": "1.10.0",
+  "groupName": "Midscene Report",
+  "groupDescription": "",
+  "modelBriefs": [],
+  "executions": [
+    {
+      "id": "5cbbaa77-bd0c-4131-8db1-4674c4ce8762",
+      "logTime": 1782223786122,
+      "name": "Tap - the blue 'Search' button",
+      "tasks": [
+        {
+          "taskId": "d9fabb59-5b3b-4a23-9e26-0579820f1c3e",
+          "status": "finished",
+          "type": "Planning",
+          "subType": "Locate",
+          "param": {
+            "prompt": "the blue 'Search' button",
+            "deepLocate": false,
+            "cacheable": true
+          },
+          "thought": "",
+          "timing": {
+            "start": 1782223786123,
+            "getUiContextStart": 1782223786124,
+            "getUiContextEnd": 1782223786184,
+            "end": 1782223786190,
+            "cost": 67
+          },
+          "uiContext": {
+            "shotSize": {
+              "width": 1280,
+              "height": 720
+            },
+            "deprecatedDpr": 1,
+            "screenshot": {
+              "type": "midscene_screenshot_ref",
+              "id": "31f46851-839e-42d7-add6-281d564c48c0",
+              "capturedAt": 1782223786164,
+              "mimeType": "image/jpeg",
+              "storage": "file",
+              "path": "./screenshots/31f46851-839e-42d7-add6-281d564c48c0.jpeg"
+            },
+            "shrunkShotToLogicalRatio": 1
+          },
+          "output": {
+            "element": {
+              "center": [
+                1071,
+                71
+              ],
+              "rect": {
+                "left": 987,
+                "top": 49,
+                "width": 168,
+                "height": 44
+              },
+              "description": "the blue 'Search' button",
+              "dpr": 1
+            }
+          },
+          "hitBy": {
+            "from": "Cache",
+            "context": {
+              "cacheEntry": {
+                "xpaths": [
+                  "/html/body/div[2]/div[1]/header[1]/section[1]/form[1]/div[2]/button[normalize-space()=\"Search\"]"
+                ]
+              }
+            }
+          },
+          "recorder": []
+        },
+        {
+          "taskId": "00b6d352-a0b5-48bd-8e70-78cb911b9a35",
+          "status": "finished",
+          "type": "Action Space",
+          "subType": "Tap",
+          "thought": "",
+          "param": {
+            "locate": {
+              "center": [
+                1071,
+                71
+              ],
+              "rect": {
+                "left": 987,
+                "top": 49,
+                "width": 168,
+                "height": 44
+              },
+              "description": "the blue 'Search' button"
+            }
+          },
+          "timing": {
+            "start": 1782223786191,
+            "getUiContextStart": 1782223786192,
+            "getUiContextEnd": 1782223786192,
+            "beforeInvokeActionHookStart": 1782223786192,
+            "beforeInvokeActionHookEnd": 1782223786402,
+            "callActionStart": 1782223786402,
+            "callActionEnd": 1782223786411,
+            "afterInvokeActionHookStart": 1782223786411,
+            "afterInvokeActionHookEnd": 1782223789243,
+            "captureAfterCallingSnapshotStart": 1782223789243,
+            "captureAfterCallingSnapshotEnd": 1782223789338,
+            "end": 1782223789338,
+            "cost": 3147
+          },
+          "uiContext": {
+            "shotSize": {
+              "width": 1280,
+              "height": 720
+            },
+            "deprecatedDpr": 1,
+            "screenshot": {
+              "type": "midscene_screenshot_ref",
+              "id": "31f46851-839e-42d7-add6-281d564c48c0",
+              "capturedAt": 1782223786164,
+              "mimeType": "image/jpeg",
+              "storage": "file",
+              "path": "./screenshots/31f46851-839e-42d7-add6-281d564c48c0.jpeg"
+            },
+            "shrunkShotToLogicalRatio": 1
+          },
+          "recorder": [
+            {
+              "type": "screenshot",
+              "ts": 1782223789338,
+              "screenshot": {
+                "type": "midscene_screenshot_ref",
+                "id": "f6465391-8c9b-466e-9b27-0ec4789e2112",
+                "capturedAt": 1782223789316,
+                "mimeType": "image/jpeg",
+                "storage": "file",
+                "path": "./screenshots/f6465391-8c9b-466e-9b27-0ec4789e2112.jpeg"
+              },
+              "timing": "after-calling"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "deviceType": "playwright"
+}

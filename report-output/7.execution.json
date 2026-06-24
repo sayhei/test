@@ -1,0 +1,113 @@
+{
+  "sdkVersion": "1.10.0",
+  "groupName": "Midscene Report",
+  "groupDescription": "",
+  "modelBriefs": [],
+  "executions": [
+    {
+      "id": "60fcfbbf-f100-496a-8116-ff87d52afcf9",
+      "logTime": 1782223805096,
+      "name": "Assert - 页面左侧有一个分类筛选栏",
+      "tasks": [
+        {
+          "taskId": "6799fe4d-3906-404e-b5e0-30ba35763976",
+          "status": "finished",
+          "type": "Insight",
+          "subType": "Assert",
+          "param": {
+            "domIncluded": false,
+            "dataDemand": "页面左侧有一个分类筛选栏"
+          },
+          "timing": {
+            "start": 1782223805097,
+            "getUiContextStart": 1782223805097,
+            "getUiContextEnd": 1782223805175,
+            "captureAfterCallingSnapshotStart": 1782223808216,
+            "captureAfterCallingSnapshotEnd": 1782223808290,
+            "end": 1782223808290,
+            "cost": 3193
+          },
+          "uiContext": {
+            "shotSize": {
+              "width": 1280,
+              "height": 720
+            },
+            "deprecatedDpr": 1,
+            "screenshot": {
+              "type": "midscene_screenshot_ref",
+              "id": "06f903d1-e8da-4f27-97eb-9d0e8c00a9e9",
+              "capturedAt": 1782223805149,
+              "mimeType": "image/jpeg",
+              "storage": "file",
+              "path": "./screenshots/06f903d1-e8da-4f27-97eb-9d0e8c00a9e9.jpeg"
+            },
+            "shrunkShotToLogicalRatio": 1
+          },
+          "log": {
+            "logId": "4f58755f-56ef-418a-bb78-df886d5e3144",
+            "logTime": 1782223808216,
+            "type": "extract",
+            "userQuery": {
+              "dataDemand": {
+                "StatementIsTruthy": "Boolean, based on the current screenshot and its contents if provided, unless the user explicitly asks to compare with reference images, whether the following statement is true: 页面左侧有一个分类筛选栏"
+              }
+            },
+            "data": {
+              "StatementIsTruthy": true
+            },
+            "taskInfo": {
+              "durationMs": 3041,
+              "rawResponse": "<thought>根据当前截图，页面左侧确实存在一个分类筛选栏。该区域包含“Category”标题及其下的多个链接选项，如“All”、“Consumer Electronics”、“Portable Audio & Headphones”等，符合“分类筛选栏”的描述。</thought>\n<data-json>\n{\n  \"StatementIsTruthy\": true\n}\n</data-json>",
+              "rawChoiceMessage": {
+                "role": "assistant",
+                "content": "<thought>根据当前截图，页面左侧确实存在一个分类筛选栏。该区域包含“Category”标题及其下的多个链接选项，如“All”、“Consumer Electronics”、“Portable Audio & Headphones”等，符合“分类筛选栏”的描述。</thought>\n<data-json>\n{\n  \"StatementIsTruthy\": true\n}\n</data-json>"
+              },
+              "formatResponse": "{\"thought\":\"根据当前截图，页面左侧确实存在一个分类筛选栏。该区域包含“Category”标题及其下的多个链接选项，如“All”、“Consumer Electronics”、“Portable Audio & Headphones”等，符合“分类筛选栏”的描述。\",\"data\":{\"StatementIsTruthy\":true}}",
+              "usage": {
+                "prompt_tokens": 1836,
+                "completion_tokens": 73,
+                "total_tokens": 1909,
+                "cached_input": 0,
+                "time_cost": 3040,
+                "model_name": "huihui_ai/qwen3-vl-abliterated:4b-instruct",
+                "model_description": "qwen3-vl mode",
+                "response_model_name": "huihui_ai/qwen3-vl-abliterated:4b-instruct",
+                "slot": "default"
+              }
+            }
+          },
+          "usage": {
+            "prompt_tokens": 1836,
+            "completion_tokens": 73,
+            "total_tokens": 1909,
+            "cached_input": 0,
+            "time_cost": 3040,
+            "model_name": "huihui_ai/qwen3-vl-abliterated:4b-instruct",
+            "model_description": "qwen3-vl mode",
+            "response_model_name": "huihui_ai/qwen3-vl-abliterated:4b-instruct",
+            "slot": "default",
+            "intent": "insight"
+          },
+          "recorder": [
+            {
+              "type": "screenshot",
+              "ts": 1782223808290,
+              "screenshot": {
+                "type": "midscene_screenshot_ref",
+                "id": "924e5df4-6882-46e6-8d6b-5986a8d244a0",
+                "capturedAt": 1782223808269,
+                "mimeType": "image/jpeg",
+                "storage": "file",
+                "path": "./screenshots/924e5df4-6882-46e6-8d6b-5986a8d244a0.jpeg"
+              },
+              "timing": "after-calling"
+            }
+          ],
+          "output": true,
+          "thought": "根据当前截图，页面左侧确实存在一个分类筛选栏。该区域包含“Category”标题及其下的多个链接选项，如“All”、“Consumer Electronics”、“Portable Audio & Headphones”等，符合“分类筛选栏”的描述。"
+        }
+      ]
+    }
+  ],
+  "deviceType": "playwright"
+}
