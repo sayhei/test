@@ -1,0 +1,131 @@
+computer:
+  displayId: '0'
+
+# 重要提示：每个步骤只做一件事，不要给 AI 太多自由
+tasks:
+  - name: 点击右下角搜索输入框
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口右下角，带有"代码/名称/简拼/功能"灰色提示文字的输入框
+      - sleep: 500
+
+  - name: 输入"股票数据浏览器"到上述输入框
+    flow:
+      - aiInput: ''
+        value: 股票数据浏览器
+        locate: Wind金融终端窗口右下角，带有"代码/名称/简拼/功能"提示文字的输入框
+      - sleep: 1500
+
+  - name: 点击下拉列表中的"股票数据浏览器"
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内，下拉列表中的"股票数据浏览器"选项，不是输入框中的文字，是下面的选项
+      - sleep: 3000
+
+  - name: 验证股票数据浏览器页面已打开
+    flow:
+      - aiWaitFor: Wind金融终端窗口内显示"股票数据浏览器"页面标题
+        timeout: 10000
+      - sleep: 1500
+
+  - name: 点击右下角代码输入框
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内股票数据浏览器页面，左下角“输入代码”文字后面的输入框
+      - sleep: 500
+
+  - name: 输入股票代码"600006"
+    flow:
+      - aiInput: ''
+        value: '600006'
+        locate: Wind金融终端窗口内股票数据浏览器页面右下角的代码输入框
+      - sleep: 1500
+
+  - name: 点击"东风股份"
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内，下拉列表中的"东风股份"
+      - sleep: 2000
+
+  - name: 点击左侧面板"按拼音查找指标"输入框
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内股票数据浏览器页面左侧面板，带有"按拼音查找指标"提示的输入框
+      - sleep: 500
+
+  - name: 输入"市值"
+    flow:
+      - aiInput: ''
+        value: 市值
+        locate: Wind金融终端窗口内左侧面板的指标搜索输入框
+      - sleep: 1500
+
+  - name: 双击"区间日均总市值-内地股票指标"选项
+    flow:
+      - aiAct: 在Wind金融终端窗口内左侧面板弹出列表中，找到"区间日均总市值 - 内地股票指标 - 行情指标"选项（不是"全球股票指标"），如果没看到，则需要滚动鼠标滚动轮，对该选项执行鼠标左键双击
+      - sleep: 2000
+
+  - name: 点击左侧面板"按拼音查找指标"输入框
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内股票数据浏览器页面左侧面板，带有"按拼音查找指标"提示的输入框
+      - sleep: 500
+
+  - name: 输入"pe"
+    flow:
+      - aiInput: ''
+        value: pe
+        locate: Wind金融终端窗口内左侧面板的指标搜索输入框
+      - sleep: 1500
+
+  - name: 双击"市盈率(TTM)-内地股票指标-估值指标"选项
+    flow:
+       - aiAct: 在Wind金融终端窗口内左侧面板弹出列表中，找到"市盈率PE(TTM) 内地股票指标 估值指标"选项（不是"全球股票指标"），对该选项执行鼠标左键双击
+       - sleep: 2000
+
+  - name: 右击"市盈率(TTM)"指标
+    flow:
+      - aiAct: 在Wind金融终端窗口内左侧面板上方待选指标列表中，找到"市盈率(TTM)"指标项，将光标移到该选项上并执行鼠标右键点击
+      - sleep: 1000
+
+  - name: 点击"添加指标"菜单项
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内弹出的右键菜单中的"添加指标"
+      - sleep: 2000
+
+  - name: 点击弹窗中的"确定"按钮
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内弹出的添加指标对话框右下角的"确定"按钮
+      - sleep: 2000
+
+  - name: 点击"提取数据"按钮
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内股票数据浏览器页面左上角的"提取数据"按钮
+      - sleep: 500
+
+  - name: 等待数据加载
+    flow:
+      - aiWaitFor: Wind金融终端窗口内股票数据浏览器页面的数据表格中显示数据
+        timeout: 15000
+      - sleep: 3000
+
+  - name: 点击"导出数据"按钮
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内股票数据浏览器页面右上角的"导出数据"按钮
+      - sleep: 1500
+
+  - name: 点击确定导出
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内导出对话框中的"立即下载"按钮
+      - sleep: 5000
+
+  - name: 点击替换并保存按钮
+    flow:
+      - aiTap: ''
+        locate: Wind金融终端窗口内提示文件已存在，则点击对话框中的"替换并保存"按钮
+      - sleep: 5000

@@ -6,6 +6,7 @@
   "scripts": {
     "verify": "npx tsx src/scripts/verify-setup.ts",
     "test:wind": "npx tsx src/tests/wind/stock-browser.ts",
+    "test:wind:yaml": "npx tsx src/tests/wind/stock-browser-yaml.ts",
     "test:ebay": "npx tsx src/tests/web/ebay.ts",
     "test:ebay:dev": "npx tsx src/tests/web/ebay-dev.ts",
     "test:ebay:prod": "MIDSCENE_CACHE_MODE=read npx tsx src/tests/web/ebay-prod.ts",
